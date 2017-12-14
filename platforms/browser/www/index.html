@@ -37,23 +37,39 @@
     </head>
     <body>
         <div class="app">
-            <h1>TP2</h1>
-            <h2>Calendar</h2>
+            <h1>SWIDO</h1>
+            <h2>Check & add your events</h2>
+
+            <div class="searchEvent">
+                <input type="text" placeholder="Nom de l'event" id="textSearch"/>
+                <select id="select">
+                    <option value="all">Tout</option>
+                    <option value="sport">Sport</option>
+                    <option value="anniversaire">Anniversaire</option>
+                    <option value="rdv">RDV</option>
+                    <option value="travail">Travail</option>
+                    <option value="other">Autre event</option>
+                </select>
+                <input type="button" name="rechercher" id="search" value="Rechercher" />
+            </div> 
+
+            <div class="listEvent"></div>
+
+            <input type="button" name="addEvent" value="Add event" id="add"/>
+
             <div id="deviceready" class="blink">
-                <form name="add" action="addEvent.html" method="post">
-                    <input type="submit" value="Add Event">
-                </form>
-                <form name="view" action="viewCalendar.html" method="post">
+                <a href="addEvent.html" class="button">Ajouter un event</a>      
+                <!--<form name="view" action="viewCalendar.html" method="post">
                     <input type="submit" value="View calendar">
                 </form>
+                <a href="addEvent.html" class="button">Ajouter un event</a>
                 <form name="goToSeriaiPage" action="seriaiPage.html" method="post">
                     <input type="submit" value="Seriai page">
-                </form>
-
-
+                </form>-->
             </div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/database.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
 </html>

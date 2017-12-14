@@ -11,39 +11,46 @@
 <body>
 
 <div class="app">
-    <h1>TP2</h1>
-    <h2>Add event</h2>
+    <h1>SWIDO</h1>
+    <h2>Create your Event</h2>
 
-    <form action="index.html" method="post">
-        <div>
-            <label for="eventDate">Date :</label>
-            <input type="date" id="eventDate" />
-        </div>
-        <div>
-            <label for="eventHour">Hour :</label>
-            <input type="time" id="eventHour" />
-        </div>
-
-        <div>
-            <label for="eventName">Name of event :</label>
-            <input type="text" id="eventName" />
-        </div>
-        <div>
-            <label for="eventDescription">Description :</label>
-            <textarea id="eventDescription"></textarea>
-        </div>
-
-        <div class="button">
-            <button type="submit">Create event</button>
-        </div>
+    <form>
+        <p>
+            <label for="eventName"></label><input type="text" placeholder="Nom de l'event" id="eventName" />
+        </p>
+        <p>
+             <label for="eventDateTime">Date : </label><input id="eventDateTime" type="datetime-local">
+        </p>
+        <!--<p>
+            <label for="eventDate">Date :</label><input id="eventDate" type="date">
+        </p>
+        <p>
+            <label for="eventHour">Hour :</label><input type="time" id="eventHour" />
+        </p>-->
+        <p>
+            <select id="selectType">
+                <option value="autre">Autre</option>
+                <option value="sport">Sport</option>
+                <option value="anniversaire">Anniversaire</option>
+                <option value="rdv">RDV</option>
+                <option value="travail">Travail</option>                    
+            </select>
+        </p>
+        <p>
+            <label for="eventDescription"></label><textarea placeholder="Describe your event" id="eventDescription"></textarea>
+        </p>
+        <p>
+            <label for="eventNotif">Notification :</label><input type="checkbox" id="eventNotif" />
+        </p>
+        <p>
+            <input type="button" name="create" value="Create event" id="create"/>
+            <input type="button" name="cancel" value="Cancel event" id="cancel"/>
+        </p>
     </form>
-    <form name="menu" action="index.html" method="post">
-        <input type="submit" value="Menu">
-    </form>
-
 </div>
 <script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/database.js"></script>
+<script type="text/javascript" src="js/addEvent.js"></script>
 
 </body>
 </html>

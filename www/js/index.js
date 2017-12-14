@@ -16,31 +16,120 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 var app = {
     // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        document.querySelector("input#search").addEventListener("click",this.onSearch);
     },
 
-    // deviceready Event Handler
-    //
-    // Bind any cordova events here. Common events are:
-    // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        this.receivedEvent('deviceready');
+        document.querySelector("input#add").addEventListener("click", function(){
+            console.log("yolo");
+            document.location.href="addEvent.html";
+        });
+
+        var db = new Database();
+
+        db.selectAllData(function(tx, results) {
+            var len = results.rows.length;
+            console.log(len);
+            if(len > 0){
+                var element = document.querySelector(".listEvent");
+                clear(element);
+                for (i = 0; i < len; i++){
+                    listEvent(element, results.rows.item(i));
+                }
+            }
+        });
+
+        function listEvent(element, item){
+            //Mise en place de la liste à revoir
+            console.log(item);
+            var a = document.createElement("a");
+            //a.href= "event.html?id=" + item.id; A DECOMMENTER QUAND Y AURA LA VUE POUR UN EVENT
+            a.href = "index.html";
+            var div = document.createElement("div");
+            div.className = "event";
+            var leftDiv = document.createElement("div");
+            var eventName = document.createElement("span");
+            eventName.className = "eventName";
+            eventName.innerHTML = item.eventName;
+            var typeEvent = document.createElement("span");
+            typeEvent.className = "typeEvent";
+            typeEvent.innerHTML = item.eventType;
+            var dateEvent = document.createElement("span");
+            dateEvent.className = "dateEvent";
+            dateEvent.innerHTML = item.date;
+            leftDiv.appendChild(eventName);
+            leftDiv.appendChild(typeEvent);
+            div.appendChild(leftDiv);
+            div.appendChild(dateEvent);
+            a.appendChild(div);
+            element.appendChild(a);
+        }
+
+        function clear(element){
+            while (element.hasChildNodes()){
+                element.removeChild(element.lastChild);
+            }
+        }
+        
     },
 
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+    onSearch: function() {
+        var nameEvent = document.querySelector("input#textSearch").value;
+        var selectType = document.querySelector("select#selectType");
+        var typeEvent = selectType.options[selectType.selectedIndex].value;
+        var db = new Database();
+        db.selectData(nameEvent, typeEvent, function(tx,results){
+            var len = results.rows.length;
+            console.log(len);
+            if(len > 0){
+                var element = document.querySelector(".listEvent");
+                clear(element);
+                for (i = 0; i < len; i++){
+                    listEvent(element, results.rows.item(i));
+                }
+            }
+        });
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+        function listEvent(element, item){
+            //Mise en place de la liste à revoir
+            console.log(item);
+            var a = document.createElement("a");
+            //a.href= "event.html?id=" + item.id; A DECOMMENTER QUAND Y AURA LA VUE POUR UN EVENT
+            a.href = "index.html";
+            var div = document.createElement("div");
+            div.className = "event";
+            var leftDiv = document.createElement("div");
+            var eventName = document.createElement("span");
+            eventName.className = "eventName";
+            eventName.innerHTML = item.eventName;
+            var typeEvent = document.createElement("span");
+            typeEvent.className = "typeEvent";
+            typeEvent.innerHTML = item.eventType;
+            var dateEvent = document.createElement("span");
+            dateEvent.className = "dateEvent";
+            dateEvent.innerHTML = item.date;
+            leftDiv.appendChild(eventName);
+            leftDiv.appendChild(typeEvent);
+            div.appendChild(leftDiv);
+            div.appendChild(dateEvent);
+            a.appendChild(div);
+            element.appendChild(a);
+        }
 
-        console.log('Received Event: ' + id);
-    }
+        function clear(element){
+            while (element.hasChildNodes()){
+                element.removeChild(element.lastChild);
+            }
+        }
+
+    },
+
+
+
 };
-
 app.initialize();
