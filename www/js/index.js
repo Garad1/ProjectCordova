@@ -32,24 +32,32 @@ var app = {
 
         var db = new Database();
 
-        db.selectAllData(function(tx, results) {
+        db.selectAllEvent(function(tx, results) {
+            var element = document.querySelector(".listEvent");
+            clear(element);
             var len = results.rows.length;
             console.log(len);
-            if(len > 0){
-                var element = document.querySelector(".listEvent");
-                clear(element);
+            if(len == 0) {
+                noResult(element);
+            } else {
                 for (i = 0; i < len; i++){
                     listEvent(element, results.rows.item(i));
                 }
-            }
+            }   
         });
+
+        function noResult(element) {
+            var p = document.createElement("p");
+            p.innerHTML = "No events"
+            element.appendChild(p);
+        }
 
         function listEvent(element, item){
             //Mise en place de la liste à revoir
             console.log(item);
             var a = document.createElement("a");
-            //a.href= "event.html?id=" + item.id; A DECOMMENTER QUAND Y AURA LA VUE POUR UN EVENT
-            a.href = "index.html";
+            a.href= "event.html?id=" + item.id; //A DECOMMENTER QUAND Y AURA LA VUE POUR UN EVENT
+            //a.href = "index.html";
             var div = document.createElement("div");
             div.className = "event";
             var leftDiv = document.createElement("div");
@@ -83,24 +91,32 @@ var app = {
         var selectType = document.querySelector("select#selectType");
         var typeEvent = selectType.options[selectType.selectedIndex].value;
         var db = new Database();
-        db.selectData(nameEvent, typeEvent, function(tx,results){
+        db.selectEvent(nameEvent, typeEvent, function(tx,results){
+            var element = document.querySelector(".listEvent");
+            clear(element);
             var len = results.rows.length;
             console.log(len);
-            if(len > 0){
-                var element = document.querySelector(".listEvent");
-                clear(element);
+            if(len == 0) {
+                noResult(element);
+            } else {
                 for (i = 0; i < len; i++){
                     listEvent(element, results.rows.item(i));
                 }
-            }
+            }   
         });
+
+        function noResult(element) {
+            var p = document.createElement("p");
+            p.innerHTML = "No events"
+            element.appendChild(p);
+        }
 
         function listEvent(element, item){
             //Mise en place de la liste à revoir
             console.log(item);
             var a = document.createElement("a");
-            //a.href= "event.html?id=" + item.id; A DECOMMENTER QUAND Y AURA LA VUE POUR UN EVENT
-            a.href = "index.html";
+            a.href= "event.html?id=" + item.id; //A DECOMMENTER QUAND Y AURA LA VUE POUR UN EVENT
+            //a.href = "index.html";
             var div = document.createElement("div");
             div.className = "event";
             var leftDiv = document.createElement("div");

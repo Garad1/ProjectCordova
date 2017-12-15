@@ -61,7 +61,7 @@ class Database{
         }
     }
 
-    selectAllData(callback){
+    selectAllEvent(callback){
         //index.js/html : pour avoir l'ensemble de tes events quand tu lances l'appli
         this.db.transaction(populateDB, null);
 
@@ -82,7 +82,7 @@ class Database{
         }
     }
 
-    selectData(name, type, callback){
+    selectEvent(name, type, callback){
         //index.js/html : pour avoir l'ensemble de tes events quand tu lances l'appli
         this.db.transaction(populateDB, null);
 
@@ -110,9 +110,47 @@ class Database{
         function errorCB(tx, err) {
             console.log("Error processing SQL: "+err);
         }
+    }
 
-        function successCB() {
-            console.log("success");
+    selectEventByID(id, callback){
+        //event.js/html : pour avoir les infos d'un event sur la page d'un event
+        this.db.transaction(populateDB, null);
+        function populateDB(tx) {
+            var sql = "SELECT * FROM EVENT e WHERE e.id = " + id + ";"
+            console.log(sql);
+            tx.executeSql(sql, [], callback, errorCB);
+        }
+        // Transaction error callback
+        function errorCB(tx, err) {
+            console.log("Error processing SQL: "+err);
+        }
+    }
+
+    updateEvent(obj, callback){
+        //event.js/html : pour avoir les infos d'un event sur la page d'un event
+        this.db.transaction(populateDB, null);
+        function populateDB(tx) {
+            var sql = "UPDATE EVENT SET description = '" + obj.description + "' WHERE id = " + obj.id + ";"
+            console.log(sql);
+            tx.executeSql(sql, [], callback, errorCB);
+        }
+        // Transaction error callback
+        function errorCB(tx, err) {
+            console.log("Error processing SQL: "+err);
+        }
+    }
+
+    deleteEvent(id, callback){
+        //event.js/html : pour avoir les infos d'un event sur la page d'un event
+        this.db.transaction(populateDB, null);
+        function populateDB(tx) {
+            var sql = "DELETE FROM EVENT WHERE id = " + id + ";"
+            console.log(sql);
+            tx.executeSql(sql, [], callback, errorCB);
+        }
+        // Transaction error callback
+        function errorCB(tx, err) {
+            console.log("Error processing SQL: "+err);
         }
     }
 }
