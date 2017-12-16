@@ -7,7 +7,7 @@ class Database{
         // Populate the database
         function populateDB(tx) {
             //CREATION DE LA TABLE
-            tx.executeSql('CREATE TABLE IF NOT EXISTS EVENT (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME DEFAULT (DATETIME(CURRENT_TIMESTAMP, \'LOCALTIME\')), eventType VARCHAR(20), eventName VARCHAR(255), description VARCHAR(2048))', [], function(tx, result){
+            tx.executeSql('CREATE TABLE IF NOT EXISTS EVENT (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME DEFAULT (DATETIME(CURRENT_TIMESTAMP, \'LOCALTIME\')), eventType VARCHAR(20), eventName VARCHAR(255), description VARCHAR(2048), notification TINYINT(1))', [], function(tx, result){
                 console.log(result);
             }, function(tx, err){
                 console.log(err);
@@ -16,7 +16,7 @@ class Database{
             //TEST INSERTION DONNEES
             /*tx.executeSql("INSERT INTO EVENT (date,eventType,eventName,description) VALUES ('2017-12-12T22:31', 'autre' ,'Yxgxf' , 'hrjbgkiyn')", [], function(tx, result){
                 console.log(result);
-            }, function(tx, err){
+            }, function(tx, err){eventNew
                 console.log(err);
             });*/
         }
@@ -32,32 +32,18 @@ class Database{
         }
     }
 
-    insertEvent(eventNew){
+    insertEvent(eventNew, callback){
         //AddEvent.js/html
-        this.db.transaction(populateDB, null , successCB, errorCB);
+        this.db.transaction(populateDB, null);
         console.log(eventNew);
 
         function populateDB(tx) {
-            //"INSERT INTO EVENT (date,eventType,eventName,description) VALUES ('2017-12-12T22:31', 'autre' ,'Yxgxf' , 'hrjbgkiyn')"
-            //console.log("INSERT INTO EVENT (date,eventType,eventName,description) VALUES (" + eventNew['date'] + ", " + eventNew['eventType'] + ", " + eventNew['eventName'] + ", " + eventNew['description'] + ")");
-            tx.executeSql("INSERT INTO EVENT (date,eventType,eventName,description) VALUES ('" + eventNew['date'] + "', '" + eventNew['eventType'] + "', '" + eventNew['eventName'] + "', '" + eventNew['description'] + "')", [], function(tx, result){
-                console.log(result);
-                document.location.href="index.html";
-            }, function(tx, err){
-                console.log(err);
-            });
-            
+            var sql = "INSERT INTO EVENT (date,eventType,eventName,description,notification) VALUES ('" + eventNew['date'] + "', '" + eventNew['eventType'] + "', '" + eventNew['eventName'] + "', '" + eventNew['description'] + "', " + eventNew['notification'] + ")";
+            tx.executeSql(sql, [], callback, errorCB);
         }
-
         // Transaction error callback
         function errorCB(tx, err) {
             console.log("Error processing SQL: "+err);
-        }
-
-        // Transaction success callback
-        function successCB() {
-            console.log("success");
-            //document.location.href="index.html";
         }
     }
 
@@ -130,7 +116,7 @@ class Database{
         //event.js/html : pour avoir les infos d'un event sur la page d'un event
         this.db.transaction(populateDB, null);
         function populateDB(tx) {
-            var sql = "UPDATE EVENT SET description = '" + obj.description + "' WHERE id = " + obj.id + ";"
+            var sql = "UPDATE EVENT SET description = '" + obj.description + "', notification = " + obj.notification + " WHERE id = " + obj.id + ";"
             console.log(sql);
             tx.executeSql(sql, [], callback, errorCB);
         }

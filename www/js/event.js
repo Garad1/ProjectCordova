@@ -15,16 +15,23 @@ var app = {
     },
 
     onDeviceReady: function() {
-    	var id = getGetParams();
+        var id = getGetParams();
     	var db = new Database();
-    	db.selectEventByID(id, function(tx, results){
-    		var item = results.rows.item(0);
+        db.selectEventByID(id, function(tx, results){
+            var item = results.rows.item(0);
     		console.log(item);
+            var dateEvent = new Date(item.date);
     		document.querySelector("#nameEvent").innerHTML = item.eventName;
-            document.querySelector("#dateEvent").innerHTML = item.date;
+            document.querySelector("#dateEvent").innerHTML = dateEvent;
             document.querySelector("#eventDescription").innerHTML = item.description;
-			document.querySelector("#typeEvent").innerHTML = item.eventType;
-    	});
+            document.querySelector("#typeEvent").innerHTML = item.eventType;
+            var notif = document.querySelector("#eventNotif");
+            if(item.notification == 1){
+                notif.checked = true;
+            } else {
+                notif.checked = false;
+            }
+        });
 
     	function getGetParams(){
             var url = new URL(window.location.href);
@@ -36,17 +43,38 @@ var app = {
     	var id = getGetParams();
     	var description = document.querySelector("#eventDescription").value;
     	var notification = document.querySelector("#eventNotif").checked; //True or false
+        console.log(notification);
+        if(notification == false){
+            var notif = 0;
+        } else {
+            var notif = 1;
+        }
+        console.log(notif);
     	var obj = {
             "id": id,
             "description" : description,
-            "notification" : notification,
+            "notification" : notif,
 		};
 
 		var db = new Database();
     	db.updateEvent(obj, function(tx, results){
     		console.log("L'event a été mise à jour");
+            /*if(obj.notification == 1) {
+                createNotification(results.insertId, eventNew['eventName'], eventNew['date'], eventNew['description']);
+            }*/
     		document.location.href="index.html";
     	});
+
+        /*function createNotification(id, nameEvent, date, description){
+            console.log(cordova);
+            cordova.plugins.notification.local.schedule({
+                id: id,
+                at: new Date(date),
+                title: nameEvent,
+                text: description,
+                autoClear  : false,   
+            });
+        }*/
 
     	function getGetParams(){
             var url = new URL(window.location.href);

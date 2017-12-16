@@ -69,6 +69,7 @@ var app = {
             typeEvent.innerHTML = item.eventType;
             var dateEvent = document.createElement("span");
             dateEvent.className = "dateEvent";
+            var dateEv = new Date(item.date);
             dateEvent.innerHTML = item.date;
             leftDiv.appendChild(eventName);
             leftDiv.appendChild(typeEvent);
@@ -128,7 +129,8 @@ var app = {
             typeEvent.innerHTML = item.eventType;
             var dateEvent = document.createElement("span");
             dateEvent.className = "dateEvent";
-            dateEvent.innerHTML = item.date;
+            var dateEv = new Date(item.date);
+            dateEvent.innerHTML = dateEv;
             leftDiv.appendChild(eventName);
             leftDiv.appendChild(typeEvent);
             div.appendChild(leftDiv);
