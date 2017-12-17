@@ -28,6 +28,7 @@
             <label for="eventHour">Hour :</label><input type="time" id="eventHour" />
         </p>-->
         <p>
+            <label for="eventType">Type : </label>
             <select id="selectType">
                 <option value="autre">Autre</option>
                 <option value="sport">Sport</option>
@@ -42,6 +43,15 @@
         <p>
             <label for="eventNotif">Notification :</label><input type="checkbox" id="eventNotif" />
         </p>
+        <p>
+            <input type="button" name="Localisation" id="addLocalisation" value="Localisation">
+            <input type="text" name="textLocalisation" id="eventLocalisation" disabled="disabled"/>
+        </p>
+            <input type="button" name="add photo" id="addPhoto" value="Ajouter une photo">
+        </p>
+        <div class="content">
+            <img id="photo" src="">
+        </div>
         <p>
             <input type="button" name="create" value="Create event" id="create"/>
             <input type="button" name="cancel" value="Cancel event" id="cancel"/>

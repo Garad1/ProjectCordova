@@ -6,12 +6,15 @@ var app = {
     // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        document.querySelector("input#addLocalisation").addEventListener("click", this.localize);
+        document.querySelector("input#addPhoto").addEventListener("click", this.addPicture);
         document.querySelector("input#update").addEventListener("click",this.onUpdate);
         document.querySelector("input#delete").addEventListener("click",this.onDelete);
         document.querySelector("input#main").addEventListener("click",function(){
             console.log("yolo");
             document.location.href="index.html";
         });
+        
     },
 
     onDeviceReady: function() {
@@ -25,11 +28,22 @@ var app = {
             document.querySelector("#dateEvent").innerHTML = dateEvent;
             document.querySelector("#eventDescription").innerHTML = item.description;
             document.querySelector("#typeEvent").innerHTML = item.eventType;
+
             var notif = document.querySelector("#eventNotif");
             if(item.notification == 1){
                 notif.checked = true;
             } else {
                 notif.checked = false;
+            }
+            
+            if(item.eventPhoto != null){
+                var image = document.querySelector("img#photo");
+                image.src = item.eventPhoto;
+                document.querySelector("input#addPhoto").value = "Changer la photo";
+            }
+            if(item.latitude != null && item.longitude != null){
+                document.querySelector("input#addLocalisation").value = "Changer la position";
+                document.querySelector("input#eventLocalisation").value = item.latitude + " : " + item.longitude;
             }
         });
 
@@ -59,13 +73,13 @@ var app = {
 		var db = new Database();
     	db.updateEvent(obj, function(tx, results){
     		console.log("L'event a été mise à jour");
-            /*if(obj.notification == 1) {
+            if(obj.notification == 1) {
                 createNotification(results.insertId, eventNew['eventName'], eventNew['date'], eventNew['description']);
-            }*/
+            }
     		document.location.href="index.html";
     	});
 
-        /*function createNotification(id, nameEvent, date, description){
+        function createNotification(id, nameEvent, date, description){
             console.log(cordova);
             cordova.plugins.notification.local.schedule({
                 id: id,
@@ -74,7 +88,7 @@ var app = {
                 text: description,
                 autoClear  : false,   
             });
-        }*/
+        }
 
     	function getGetParams(){
             var url = new URL(window.location.href);
@@ -94,6 +108,34 @@ var app = {
             var url = new URL(window.location.href);
             return url.searchParams.get("id"); 
 		}
+    },
+
+    localize: function(){
+        console.log("Localisation de l'appareil");
+        navigator.geolocation.getCurrentPosition(onSuccess,onError, {timeout: 10000, enableHighAccuracy: true});
+        console.log("Position en cours de récup");
+        function onSuccess(position){
+            console.log(position.coords.latitude + " : " + position.coords.longitude);
+            document.querySelector("input#eventLocalisation").value = position.coords.latitude + ":" + position.coords.longitude;
+        }
+
+        function onError(error){
+            alert('Veuillez activer la localisation');
+        }
+    },
+
+    addPicture: function(){
+        navigator.camera.getPicture(onSuccess, onFail, { quality: 50,destinationType: Camera.DestinationType.FILE_URI, targetHeight: 300, targetWidth:300 });
+
+        function onSuccess(imageURI) {
+            console.log(imageURI);
+            var image = document.querySelector("img#photo");
+            image.src = imageURI;
+        }
+
+        function onFail(message) {
+            alert('Failed because: ' + message);
+        }
     },
 
 };

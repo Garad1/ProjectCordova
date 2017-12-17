@@ -7,7 +7,7 @@ class Database{
         // Populate the database
         function populateDB(tx) {
             //CREATION DE LA TABLE
-            tx.executeSql('CREATE TABLE IF NOT EXISTS EVENT (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME DEFAULT (DATETIME(CURRENT_TIMESTAMP, \'LOCALTIME\')), eventType VARCHAR(20), eventName VARCHAR(255), description VARCHAR(2048), notification TINYINT(1))', [], function(tx, result){
+            tx.executeSql('CREATE TABLE IF NOT EXISTS EVENT (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME DEFAULT (DATETIME(CURRENT_TIMESTAMP, \'LOCALTIME\')), eventType VARCHAR(20), eventName VARCHAR(255), description VARCHAR(2048), notification TINYINT(1), latitude VARCHAR(255), longitude VARCHAR(255), eventPhoto VARCHAR(2048))', [], function(tx, result){
                 console.log(result);
             }, function(tx, err){
                 console.log(err);
@@ -38,7 +38,7 @@ class Database{
         console.log(eventNew);
 
         function populateDB(tx) {
-            var sql = "INSERT INTO EVENT (date,eventType,eventName,description,notification) VALUES ('" + eventNew['date'] + "', '" + eventNew['eventType'] + "', '" + eventNew['eventName'] + "', '" + eventNew['description'] + "', " + eventNew['notification'] + ")";
+            var sql = "INSERT INTO EVENT (date,eventType,eventName,description,notification,latitude,longitude,eventPhoto) VALUES ('" + eventNew['date'] + "', '" + eventNew['eventType'] + "', '" + eventNew['eventName'] + "', '" + eventNew['description'] + "', " + eventNew['notification'] + ", '" + eventNew['latitude'] + "', '" + eventNew['longitude'] + "', '" + eventNew['eventPhoto'] + "')";
             tx.executeSql(sql, [], callback, errorCB);
         }
         // Transaction error callback
@@ -53,7 +53,7 @@ class Database{
 
         // Populate the database
         function populateDB(tx) {
-            var sql = "SELECT * FROM EVENT";
+            var sql = "SELECT * FROM EVENT ORDER BY date ASC";
             console.log(sql);
             tx.executeSql(sql, [], callback, errorCB);
         }
