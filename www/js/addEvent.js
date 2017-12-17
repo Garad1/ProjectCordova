@@ -25,10 +25,6 @@ var app = {
 
     onDeviceReady: function() {
         document.querySelector("input#create").addEventListener("click", this.insertEvent);
-        document.querySelector("input#cancel").addEventListener("click", function(){
-            console.log("yolo");
-            document.location.href="index.html";
-		});
         document.querySelector("input#addLocalisation").addEventListener("click", this.localize);
         document.querySelector("input#addPhoto").addEventListener("click", this.addPicture);
 	},

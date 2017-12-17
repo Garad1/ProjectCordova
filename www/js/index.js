@@ -55,6 +55,10 @@ var app = {
         function listEvent(element, item){
             //Mise en place de la liste à revoir
             console.log(item);
+            var dateTime = item.date.split(":");
+            var date = dateTime[0];
+            var time = dateTime[1];
+
             var a = document.createElement("a");
             a.href= "event.html?id=" + item.id; //A DECOMMENTER QUAND Y AURA LA VUE POUR UN EVENT
             //a.href = "index.html";
@@ -69,8 +73,8 @@ var app = {
             typeEvent.innerHTML = item.eventType;
             var dateEvent = document.createElement("span");
             dateEvent.className = "dateEvent";
-            var dateEv = new Date(item.date);
-            dateEvent.innerHTML = item.date;
+            //var dateEv = new Date(item.date);
+            dateEvent.innerHTML = date + " " + time;
             leftDiv.appendChild(eventName);
             leftDiv.appendChild(typeEvent);
             div.appendChild(leftDiv);
@@ -115,6 +119,10 @@ var app = {
         function listEvent(element, item){
             //Mise en place de la liste à revoir
             console.log(item);
+            var dateTime = item.date.split(":");
+            var date = dateTime[0];
+            var time = dateTime[1];
+            
             var a = document.createElement("a");
             a.href= "event.html?id=" + item.id; //A DECOMMENTER QUAND Y AURA LA VUE POUR UN EVENT
             //a.href = "index.html";
@@ -129,8 +137,8 @@ var app = {
             typeEvent.innerHTML = item.eventType;
             var dateEvent = document.createElement("span");
             dateEvent.className = "dateEvent";
-            var dateEv = new Date(item.date);
-            dateEvent.innerHTML = dateEv;
+            //var dateEv = new Date(item.date);
+            dateEvent.innerHTML = date + " " + time;
             leftDiv.appendChild(eventName);
             leftDiv.appendChild(typeEvent);
             div.appendChild(leftDiv);

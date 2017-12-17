@@ -10,10 +10,7 @@ var app = {
         document.querySelector("input#addPhoto").addEventListener("click", this.addPicture);
         document.querySelector("input#update").addEventListener("click",this.onUpdate);
         document.querySelector("input#delete").addEventListener("click",this.onDelete);
-        document.querySelector("input#main").addEventListener("click",function(){
-            console.log("yolo");
-            document.location.href="index.html";
-        });
+        document.querySelector("input#startSport").addEventListener("click",this.startSport);
         
     },
 
@@ -25,7 +22,7 @@ var app = {
     		console.log(item);
             var dateEvent = new Date(item.date);
     		document.querySelector("#nameEvent").innerHTML = item.eventName;
-            document.querySelector("#dateEvent").innerHTML = dateEvent;
+            document.querySelector("#dateEvent").innerHTML = item.date;
             document.querySelector("#eventDescription").innerHTML = item.description;
             document.querySelector("#typeEvent").innerHTML = item.eventType;
 
@@ -44,6 +41,9 @@ var app = {
             if(item.latitude != null && item.longitude != null){
                 document.querySelector("input#addLocalisation").value = "Changer la position";
                 document.querySelector("input#eventLocalisation").value = item.latitude + " : " + item.longitude;
+            }
+            if(item.eventType == "sport") {
+                document.querySelector("input#startSport").style.visibility = "visible";
             }
         });
 
