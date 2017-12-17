@@ -18,48 +18,52 @@
 </header>
 
 <div class="app">
-    <h2>Create your Event</h2>
+    <h2>Nouvel événement</h2>
 
-    <form>
-        <p>
-            <label for="eventName"></label><input type="text" placeholder="Nom de l'event" id="eventName" />
-        </p>
-        <p>
-             <label for="eventDateTime">Date : </label><input id="eventDateTime" type="datetime-local">
-        </p>
-        <!--<p>
-            <label for="eventDate">Date :</label><input id="eventDate" type="date">
-        </p>
-        <p>
-            <label for="eventHour">Hour :</label><input type="time" id="eventHour" />
-        </p>-->
-        <p>
-            <label for="eventType">Type : </label>
-            <select id="selectType">
-                <option value="autre">Autre</option>
-                <option value="sport">Sport</option>
-                <option value="anniversaire">Anniversaire</option>
-                <option value="rdv">RDV</option>
-                <option value="travail">Travail</option>                    
-            </select>
-        </p>
-        <p>
-            <label for="eventDescription"></label><textarea placeholder="Describe your event" id="eventDescription"></textarea>
-        </p>
-        <p>
-            <label for="eventNotif">Notification :</label><input type="checkbox" id="eventNotif" />
-        </p>
-        <p>
-            <input type="button" name="Localisation" id="addLocalisation" value="Localisation">
-            <input type="text" name="textLocalisation" id="eventLocalisation" disabled="disabled"/>
-        </p>
-            <input type="button" name="add photo" id="addPhoto" value="Ajouter une photo">
-        </p>
-        <div class="content">
-            <img id="photo" src="">
-        </div>
-        
-    </form>
+    <div class="searchEvent">
+        <h3 id="creation">Création</h3>
+        <form>
+            <p>
+                <label for="eventName"></label><input type="text" placeholder="Nom de l'event" id="eventName" />
+            </p>
+            <p>
+                 <label for="eventDateTime">Date : </label><input id="eventDateTime" type="datetime-local">
+            </p>
+            <!--<p>
+                <label for="eventDate">Date :</label><input id="eventDate" type="date">
+            </p>
+            <p>
+                <label for="eventHour">Hour :</label><input type="time" id="eventHour" />
+            </p>-->
+            <p>
+                <label for="eventType">Type : </label>
+                <select id="selectType">
+                    <option value="autre">Autre</option>
+                    <option value="sport">Sport</option>
+                    <option value="anniversaire">Anniversaire</option>
+                    <option value="rdv">RDV</option>
+                    <option value="travail">Travail</option>                    
+                </select>
+            </p>
+            <p>
+                <label for="eventDescription"></label><textarea placeholder="Describe your event" id="eventDescription"></textarea>
+            </p>
+            <p>
+                <label for="eventNotif">Notification :</label><input type="checkbox" id="eventNotif" />
+            </p>
+            <p>
+                <input type="button" name="Localisation" id="addLocalisation" value="Localisation">
+                <input type="text" name="textLocalisation" id="eventLocalisation" disabled="disabled"/>
+            </p>
+                <input type="button" name="add photo" id="addPhoto" value="Ajouter une photo">
+            </p>
+            <div class="content">
+                <img id="photo" src="">
+            </div>
+            
+        </form>
+
+    </div>
 </div>
 <footer>
     <input type="button" name="create" value="Créer" id="create"/>
