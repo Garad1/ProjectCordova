@@ -64,8 +64,8 @@ var app = {
         db.insertEvent(eventNew, function(tx,results){
             console.log(results);
             console.log(results.insertId);
-            var date = new Date(eventNew['date']);
-            createNotification(results.insertId, eventNew['eventName'], date, eventNew['description']);
+           // var date = new Date(eventNew['date']);
+            createNotification(results.insertId, eventNew['eventName'], eventNew['date'], eventNew['description']);
             document.location.href="index.html";
         });
 
@@ -73,7 +73,7 @@ var app = {
             console.log(cordova);
             cordova.plugins.notification.local.schedule({
                 id: id,
-                at: date,
+                at: new Date(date),
                 title: nameEvent,
                 text: description,
                 smallIcon: 'res://cordova',

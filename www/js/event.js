@@ -57,7 +57,7 @@ var app = {
 
     	var obj = {
             "id": id,
-            "description" : description,
+            "description" : description
 		};
 
 		var db = new Database();
