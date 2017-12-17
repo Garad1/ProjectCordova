@@ -35,12 +35,31 @@ body {
     margin-top: 2%;
 }
 
+a{
+    color: black;
+    text-decoration: none;
+}
+
+.event{
+    background-color: #f4c262;
+    border-radius: 7px;
+    margin-bottom: 2%;
+}
+
 .searchEvent{
     width: 100%;
     border-radius: 10px;
     box-shadow: 1px 1px 1px 1px;
     background-color: #fff5bc;
     margin-bottom: 10%;
+}
+
+.formulary{
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px 1px;
+    background-color: #fff5bc;
+    margin-bottom: 20%;
 }
 
 .listEvent{
