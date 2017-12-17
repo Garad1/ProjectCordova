@@ -9,7 +9,8 @@
 }*/
 
 header {
-    height: 10%;
+
+    height: 4em;
     margin-top: 0px;
     top: 0px;
     right: 0px;
@@ -25,7 +26,6 @@ body {
     margin-top: 19%;
     margin-left: 5%;
     margin-right: 5%;
-    margin-bottom:20%;
     position: absolute;
     background-color: #ffffee;
     text-align: center;
@@ -44,7 +44,8 @@ body {
 
 .listEvent{
     margin-top: 5%;
-    margin-bottom: 10%;
+    margin-bottom: 20%;
+
 }
 
 #recherche{
@@ -57,6 +58,10 @@ body {
     border-radius: 5px;
     text-align: center;
 
+}
+
+.categorie{
+    margin-top: 2%;
 }
 
 #add, #create, #update {
@@ -78,7 +83,8 @@ footer {
     bottom: 0px;
     right: 0px;
     left: 0px;
-    height: 8%;
+    margin-top: 2px;
+    height: 3em;
     margin-bottom: 0px;
     text-align: center;
     position:fixed;
