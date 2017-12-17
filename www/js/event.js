@@ -28,12 +28,8 @@ var app = {
             document.querySelector("#eventDescription").innerHTML = item.description;
             document.querySelector("#typeEvent").innerHTML = item.eventType;
 
-            var notif = document.querySelector("#eventNotif");
-            if(item.notification == 1){
-                notif.checked = true;
-            } else {
-                notif.checked = false;
-            }
+
+            
             
             if(item.eventPhoto != null){
                 var image = document.querySelector("img#photo");
@@ -58,18 +54,10 @@ var app = {
     onUpdate: function() {
     	var id = getGetParams();
     	var description = document.querySelector("#eventDescription").value;
-    	var notification = document.querySelector("#eventNotif").checked; //True or false
-        console.log(notification);
-        if(notification == false){
-            var notif = 0;
-        } else {
-            var notif = 1;
-        }
-        console.log(notif);
+
     	var obj = {
             "id": id,
             "description" : description,
-            "notification" : notif,
 		};
 
 		var db = new Database();
