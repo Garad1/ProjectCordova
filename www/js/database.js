@@ -116,7 +116,7 @@ class Database{
         //event.js/html : pour avoir les infos d'un event sur la page d'un event
         this.db.transaction(populateDB, null);
         function populateDB(tx) {
-            var sql = "UPDATE EVENT SET description = '" + obj.description + "', notification = 1 WHERE id = " + obj.id + ";"
+            var sql = "UPDATE EVENT SET description = '" + obj.description + "', notification = 1, eventPhoto = '" + obj.photo + "', latitude = '" + obj.latitude + "', longitude = '" + obj.longitude + "'  WHERE id = " + obj.id + ";"
             console.log(sql);
             tx.executeSql(sql, [], callback, errorCB);
         }

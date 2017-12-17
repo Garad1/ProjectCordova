@@ -64,13 +64,14 @@ var app = {
         db.insertEvent(eventNew, function(tx,results){
             console.log(results);
             console.log(results.insertId);
-           // var date = new Date(eventNew['date']);
             createNotification(results.insertId, eventNew['eventName'], eventNew['date'], eventNew['description']);
             document.location.href="index.html";
         });
 
         function createNotification(id, nameEvent, date, description){
             console.log(cordova);
+            console.log(date);
+            console.log(new Date(date));
             cordova.plugins.notification.local.schedule({
                 id: id,
                 at: new Date(date),
@@ -78,6 +79,7 @@ var app = {
                 text: description,
                 smallIcon: 'res://cordova',
             });
+            console.log("GG LA NOTIF");
         }
     },
 

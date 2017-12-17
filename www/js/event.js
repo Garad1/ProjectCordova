@@ -28,9 +28,6 @@ var app = {
             document.querySelector("#eventDescription").innerHTML = item.description;
             document.querySelector("#typeEvent").innerHTML = item.eventType;
 
-
-            
-            
             if(item.eventPhoto != null){
                 var image = document.querySelector("img#photo");
                 image.src = item.eventPhoto;
@@ -54,10 +51,17 @@ var app = {
     onUpdate: function() {
     	var id = getGetParams();
     	var description = document.querySelector("#eventDescription").value;
-
+        var photo = document.querySelector("img#photo").src;
+        var localisation = document.querySelector("input#eventLocalisation").value;
+        var loc = localisation.split(":");
+        var latitude = loc[0];
+        var longitude = loc[1];
     	var obj = {
             "id": id,
-            "description" : description
+            "description" : description,
+            "latitude" : latitude,
+            "longitude" : longitude,
+            "photo" : photo
 		};
 
 		var db = new Database();
