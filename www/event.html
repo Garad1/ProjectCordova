@@ -2,7 +2,7 @@
 Affichage d'un event pour avoir plus d'infos dessus !
 -->
 
-<html>
+<html lang="fr">
     <head>
         <!--
         Customize this policy to fit your own app's needs. For more guidance, see:
@@ -17,12 +17,20 @@ Affichage d'un event pour avoir plus d'infos dessus !
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="css/index.css">
+
 
         <title>Swido</title>
     </head>
 
     <body>
+
+        <header>
+            <div id="titleImg">
+                <img src="img/title.png"/>
+            </div>
+        </header>
         <div class="app">
             <h1>Your Event</h1>
             <h2 id="nameEvent"></h2>
@@ -49,14 +57,16 @@ Affichage d'un event pour avoir plus d'infos dessus !
                 <img id="photo" src="">
             </div>
             <p>
-                <input type="button" name="updateEvent" value="Update event" id="update"/>
                 <input type="button" name="deleteEvent" value="Delete event" id="delete"/>
             </p>
-            <input type="button" name="ReturnToHome" value="Back" id="main"/>
 
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/database.js"></script>
         <script type="text/javascript" src="js/event.js"></script>
+
+        <footer>
+            <input type="button" name="updateEvent" value="Modifier l'événement" id="update"/>
+        </footer>
     </body>
 </html>

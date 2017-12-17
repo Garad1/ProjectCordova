@@ -21,6 +21,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+        document.querySelector("input#search").addEventListener("click",this.onSearch);
     },
 
     onDeviceReady: function() {
@@ -28,7 +29,125 @@ var app = {
             console.log("yolo");
             document.location.href="addEvent.html";
         });
+
+        var db = new Database();
+
+        db.selectAllEvent(function(tx, results) {
+            var element = document.querySelector(".listEvent");
+            clear(element);
+            var len = results.rows.length;
+            console.log(len);
+            if(len == 0) {
+                noResult(element);
+            } else {
+                for (i = 0; i < len; i++){
+                    listEvent(element, results.rows.item(i));
+                }
+            }   
+        });
+
+        function noResult(element) {
+            var p = document.createElement("p");
+            p.innerHTML = "No events"
+            element.appendChild(p);
+        }
+
+        function listEvent(element, item){
+            //Mise en place de la liste à revoir
+            console.log(item);
+            var a = document.createElement("a");
+            a.href= "event.html?id=" + item.id; //A DECOMMENTER QUAND Y AURA LA VUE POUR UN EVENT
+            //a.href = "index.html";
+            var div = document.createElement("div");
+            div.className = "event";
+            var leftDiv = document.createElement("div");
+            var eventName = document.createElement("span");
+            eventName.className = "eventName";
+            eventName.innerHTML = item.eventName;
+            var typeEvent = document.createElement("span");
+            typeEvent.className = "typeEvent";
+            typeEvent.innerHTML = item.eventType;
+            var dateEvent = document.createElement("span");
+            dateEvent.className = "dateEvent";
+            var dateEv = new Date(item.date);
+            dateEvent.innerHTML = item.date;
+            leftDiv.appendChild(eventName);
+            leftDiv.appendChild(typeEvent);
+            div.appendChild(leftDiv);
+            div.appendChild(dateEvent);
+            a.appendChild(div);
+            element.appendChild(a);
+        }
+
+        function clear(element){
+            while (element.hasChildNodes()){
+                element.removeChild(element.lastChild);
+            }
+        }
+        
     },
+
+    onSearch: function() {
+        var nameEvent = document.querySelector("input#textSearch").value;
+        var selectType = document.querySelector("select#selectType");
+        var typeEvent = selectType.options[selectType.selectedIndex].value;
+        var db = new Database();
+        db.selectEvent(nameEvent, typeEvent, function(tx,results){
+            var element = document.querySelector(".listEvent");
+            clear(element);
+            var len = results.rows.length;
+            console.log(len);
+            if(len == 0) {
+                noResult(element);
+            } else {
+                for (i = 0; i < len; i++){
+                    listEvent(element, results.rows.item(i));
+                }
+            }   
+        });
+
+        function noResult(element) {
+            var p = document.createElement("p");
+            p.innerHTML = "No events"
+            element.appendChild(p);
+        }
+
+        function listEvent(element, item){
+            //Mise en place de la liste à revoir
+            console.log(item);
+            var a = document.createElement("a");
+            a.href= "event.html?id=" + item.id; //A DECOMMENTER QUAND Y AURA LA VUE POUR UN EVENT
+            //a.href = "index.html";
+            var div = document.createElement("div");
+            div.className = "event";
+            var leftDiv = document.createElement("div");
+            var eventName = document.createElement("span");
+            eventName.className = "eventName";
+            eventName.innerHTML = item.eventName;
+            var typeEvent = document.createElement("span");
+            typeEvent.className = "typeEvent";
+            typeEvent.innerHTML = item.eventType;
+            var dateEvent = document.createElement("span");
+            dateEvent.className = "dateEvent";
+            var dateEv = new Date(item.date);
+            dateEvent.innerHTML = dateEv;
+            leftDiv.appendChild(eventName);
+            leftDiv.appendChild(typeEvent);
+            div.appendChild(leftDiv);
+            div.appendChild(dateEvent);
+            a.appendChild(div);
+            element.appendChild(a);
+        }
+
+        function clear(element){
+            while (element.hasChildNodes()){
+                element.removeChild(element.lastChild);
+            }
+        }
+
+    },
+
+
 
 };
 app.initialize();
