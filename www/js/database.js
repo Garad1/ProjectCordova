@@ -38,7 +38,7 @@ class Database{
         console.log(eventNew);
 
         function populateDB(tx) {
-            var sql = "INSERT INTO EVENT (date,eventType,eventName,description,notification,latitude,longitude,eventPhoto) VALUES ('" + eventNew['date'] + "', '" + eventNew['eventType'] + "', '" + eventNew['eventName'] + "', '" + eventNew['description'] + "', " + eventNew['notification'] + ", '" + eventNew['latitude'] + "', '" + eventNew['longitude'] + "', '" + eventNew['eventPhoto'] + "')";
+            var sql = "INSERT INTO EVENT (date,eventType,eventName,description,notification,latitude,longitude,eventPhoto) VALUES ('" + eventNew['date'] + "', '" + eventNew['eventType'] + "', '" + eventNew['eventName'] + "', '" + eventNew['description'] + "', 1 , '" + eventNew['latitude'] + "', '" + eventNew['longitude'] + "', '" + eventNew['eventPhoto'] + "')";
             tx.executeSql(sql, [], callback, errorCB);
         }
         // Transaction error callback
@@ -83,9 +83,9 @@ class Database{
                 }
             } else {
                 if(type == 'all'){
-                    var sql = "SELECT * FROM EVENT e WHERE e.eventName LIKE %" + name + "% ;"
+                    var sql = "SELECT * FROM EVENT e WHERE e.eventName LIKE '%" + name + "%' ;"
                 } else {
-                    var sql = "SELECT * FROM EVENT e WHERE e.eventType = '" + type + "' AND e.eventName LIKE %" + name + "% ;"
+                    var sql = "SELECT * FROM EVENT e WHERE e.eventType = '" + type + "' AND e.eventName LIKE '%" + name + "%' ;"
                 }
             }
             console.log(sql)
@@ -116,7 +116,7 @@ class Database{
         //event.js/html : pour avoir les infos d'un event sur la page d'un event
         this.db.transaction(populateDB, null);
         function populateDB(tx) {
-            var sql = "UPDATE EVENT SET description = '" + obj.description + "', notification = " + obj.notification + " WHERE id = " + obj.id + ";"
+            var sql = "UPDATE EVENT SET description = '" + obj.description + "', notification = 1 WHERE id = " + obj.id + ";"
             console.log(sql);
             tx.executeSql(sql, [], callback, errorCB);
         }

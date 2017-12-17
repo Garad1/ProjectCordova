@@ -73,18 +73,17 @@ var app = {
             //var eventDate = eventNew['date'].split("T");
             //var date = eventDate[0] + " " + eventDate[1];
             var date = new Date(eventNew['date']);
-            if(eventNew['notification'] == 1) {
-                console.log(results.insertId);
-                createNotification(results.insertId, eventNew['eventName'], eventNew['date'], eventNew['description']);
-            }
-            document.location.href="index.html";
+            console.log(results.insertId);
+            createNotification(results.insertId, eventNew['eventName'], date, eventNew['description']);
+            //document.location.href="index.html";
         });
 
         function createNotification(id, nameEvent, date, description){
             console.log(cordova);
+            console.log(new Date(date));
             cordova.plugins.notification.local.schedule({
                 id: id,
-                at: new Date(date),
+                at: new Date(),
                 title: nameEvent,
                 text: description,
                 smallIcon: 'res://cordova',

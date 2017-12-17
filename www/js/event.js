@@ -20,9 +20,11 @@ var app = {
         db.selectEventByID(id, function(tx, results){
             var item = results.rows.item(0);
     		console.log(item);
-            var dateEvent = new Date(item.date);
+            var dateTime = item.date.split("T");
+            var date = dateTime[0];
+            var time = dateTime[1];
     		document.querySelector("#nameEvent").innerHTML = item.eventName;
-            document.querySelector("#dateEvent").innerHTML = item.date;
+            document.querySelector("#dateEvent").innerHTML = date + " " + time;
             document.querySelector("#eventDescription").innerHTML = item.description;
             document.querySelector("#typeEvent").innerHTML = item.eventType;
 
@@ -73,22 +75,8 @@ var app = {
 		var db = new Database();
     	db.updateEvent(obj, function(tx, results){
     		console.log("L'event a été mise à jour");
-            if(obj.notification == 1) {
-                createNotification(results.insertId, eventNew['eventName'], eventNew['date'], eventNew['description']);
-            }
     		document.location.href="index.html";
     	});
-
-        function createNotification(id, nameEvent, date, description){
-            console.log(cordova);
-            cordova.plugins.notification.local.schedule({
-                id: id,
-                at: new Date(date),
-                title: nameEvent,
-                text: description,
-                autoClear  : false,   
-            });
-        }
 
     	function getGetParams(){
             var url = new URL(window.location.href);

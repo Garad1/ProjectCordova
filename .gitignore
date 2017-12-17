@@ -11,5 +11,6 @@ platforms/*
 .bash_profile
 npm-debug.log
 node_modules/*
+.idea/*
 
 # End of https://www.gitignore.io/api/apachecordova

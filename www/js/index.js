@@ -41,6 +41,7 @@ var app = {
                 noResult(element);
             } else {
                 for (i = 0; i < len; i++){
+
                     listEvent(element, results.rows.item(i));
                 }
             }   
@@ -55,7 +56,7 @@ var app = {
         function listEvent(element, item){
             //Mise en place de la liste à revoir
             console.log(item);
-            var dateTime = item.date.split(":");
+            var dateTime = item.date.split("T");
             var date = dateTime[0];
             var time = dateTime[1];
 
@@ -64,7 +65,7 @@ var app = {
             //a.href = "index.html";
             var div = document.createElement("div");
             div.className = "event";
-            var leftDiv = document.createElement("div");
+            //var leftDiv = document.createElement("div");
             var eventName = document.createElement("span");
             eventName.className = "eventName";
             eventName.innerHTML = item.eventName;
@@ -75,14 +76,14 @@ var app = {
             dateEvent.className = "dateEvent";
             //var dateEv = new Date(item.date);
             dateEvent.innerHTML = date + " " + time;
-            leftDiv.appendChild(eventName);
-            leftDiv.appendChild(typeEvent);
-            div.appendChild(leftDiv);
+            div.appendChild(eventName);
+            div.appendChild(document.createElement("br"));
             div.appendChild(dateEvent);
             a.appendChild(div);
             element.appendChild(a);
         }
 
+        
         function clear(element){
             while (element.hasChildNodes()){
                 element.removeChild(element.lastChild);
@@ -119,16 +120,16 @@ var app = {
         function listEvent(element, item){
             //Mise en place de la liste à revoir
             console.log(item);
-            var dateTime = item.date.split(":");
+            var dateTime = item.date.split("T");
             var date = dateTime[0];
             var time = dateTime[1];
-            
+
             var a = document.createElement("a");
             a.href= "event.html?id=" + item.id; //A DECOMMENTER QUAND Y AURA LA VUE POUR UN EVENT
             //a.href = "index.html";
             var div = document.createElement("div");
             div.className = "event";
-            var leftDiv = document.createElement("div");
+            //var leftDiv = document.createElement("div");
             var eventName = document.createElement("span");
             eventName.className = "eventName";
             eventName.innerHTML = item.eventName;
@@ -139,9 +140,8 @@ var app = {
             dateEvent.className = "dateEvent";
             //var dateEv = new Date(item.date);
             dateEvent.innerHTML = date + " " + time;
-            leftDiv.appendChild(eventName);
-            leftDiv.appendChild(typeEvent);
-            div.appendChild(leftDiv);
+            div.appendChild(eventName);
+            div.appendChild(document.createElement("br"));
             div.appendChild(dateEvent);
             a.appendChild(div);
             element.appendChild(a);
