@@ -43,16 +43,24 @@ var app = {
         //$('#js-stop').on('click', app.stop);
         //$('#js-reset').on('click', app.reset);
         var plugin = cordova.plugins.backgroundMode;
-        //plugin.setDefaults({ silent: true });
-        //plugin.on('activate', app.startBackground);
-        //plugin.on('deactivate', app.stopBackground);
+        plugin.setDefaults({ silent: true });
+        plugin.on('activate', app.startBackground);
+        plugin.on('deactivate', app.stopBackground);
         //plugin.addEventListener('activate', this.startBackground);
         //plugin.addEventListener('deactivate', this.stopBackground);
-
+        console.log('Test true data');
+        var p1 = new LatLon(43.6126935, 3.8746068);
+        var p2 = new LatLon(43.6126934, 3.8746058);
+        var d = p1.distanceTo(p2); // 404.3 km
+        console.log(d);
+        console.log('Test fake data');
+        var p1a = new LatLon(52.205, 0.119);
+        var p2a = new LatLon(48.857, 2.351);
+        var da = p1a.distanceTo(p2a); // 404.3 km
+        console.log(da);
         app.chrono = new Chrono(function(str){
             console.log(str);
-            document.querySelector("#js-chrono").innerHTML = str;
-            //$('#js-chrono').text(str);
+            $('#js-chrono').text(str);
         })
     },
 
@@ -62,7 +70,7 @@ var app = {
             app.chrono.play();
             var plugin = cordova.plugins.backgroundMode;
             plugin.setEnabled(true);
-            //app.setGeolocalisation();
+            app.setGeolocalisation();
             app.isStarted = true;
         }
     },
@@ -76,7 +84,7 @@ var app = {
     reset: function(){
         console.log('reset');
         app.chrono.reset();
-        //$('#js-meter').text('0');
+        $('#js-meter').text('0');
         app.nbMeter = 0;
         app.latitude = null,
         app.longitude = null,
@@ -87,18 +95,18 @@ var app = {
     pauseAndResetHandler: function(){
         var plugin = cordova.plugins.backgroundMode;
         plugin.setEnabled(false);
-        //navigator.geolocation.clearWatch    (app.watchId);
+        navigator.geolocation.clearWatch(app.watchId);
         app.isStarted = false;
     },
 
     startBackground: function() {
         console.log('startBackgroundService');
         app.chrono.pause();
-        //navigator.geolocation.clearWatch(app.watchId);
+        navigator.geolocation.clearWatch(app.watchId);
         app.intervalId = setInterval(function () {
             app.chrono.tick();
-            // Ne marche pas :(
-            //navigator.geolocation.getCurrentPosition(app.geolocationSuccess, app.geolocationError, { enableHighAccuracy: true });
+            console.log('test2');
+            navigator.geolocation.getCurrentPosition(app.geolocationSuccess, app.geolocationError, { enableHighAccuracy: true });
         }, 1000);
     },
 
@@ -107,31 +115,33 @@ var app = {
         clearInterval(app.intervalId);
         app.chrono.updateShow();
         app.chrono.play();
-        /*
         var isActivated = app.setGeolocalisation();
-        if(!isActivated){
+        /*if(!isActivated){
             $('#js-section-chrono').hide();
         }
         else{
             $('#js-section-chrono').show();
-        }
-        */
+        }*/
     },
 
-    /*geolocationSuccess: function(position){
+    geolocationSuccess: function(position){
         console.log('test');
         var updatedLatitude = position.coords.latitude;
         var updatedLongitude = position.coords.longitude;
+        console.log(app.latitude);
+        console.log(app.longitude);
+        console.log(updatedLatitude);
+        console.log(updatedLongitude);
         if (updatedLatitude != app.latitude && updatedLongitude != app.longitude) {
             if(app.latitude !== null && app.longitude !== null){
                 var result = app.calculDistance(app.latitude, app.longitude, updatedLatitude, updatedLongitude);
                 app.nbMeter += result;
-                console.log(result);    
+                console.log(app.nbMeter.toFixed(2));    
             }
+            console.log("MARCHEEEEE")
             app.latitude = updatedLatitude;
             app.longitude = updatedLongitude;
-
-            $('#js-meter').text(Math.round(app.nbMeter));
+            $('#js-meter').text(app.nbMeter.toFixed(2));
         }
     },
 
@@ -143,7 +153,9 @@ var app = {
         cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
             console.log("GPS location is " + (enabled ? "enabled" : "disabled"));
             if(enabled){
+                //navigator.getCurrentPosition(app.geolocationSuccess, app.geolocationError, { enableHighAccuracy: true });
                 app.watchId = navigator.geolocation.watchPosition(app.geolocationSuccess, app.geolocationError, {maximumAge: 3000, enableHighAccuracy: true });
+                
             }
             else{
                 cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
@@ -170,8 +182,24 @@ var app = {
     calculDistance: function(oldLat, oldLong, newLat, newLong){
         oldPos = new LatLon(oldLat, oldLong);
         newPos = new LatLon(newLat, newLong);
+        
+        //console.log('YOLO');
+        
+        /*console.log('Test true data');
+        var p1 = new LatLon(43.6126935, 3.8746068);
+        var p2 = new LatLon(43.6126934, 3.8746058);
+        var d = p1.distanceTo(p2); // 404.3 km
+        console.log(d);
+        console.log('Test fake data');
+        var p1a = new LatLon(52.205, 0.119);
+        var p2a = new LatLon(48.857, 2.351);
+        var da = p1a.distanceTo(p2a); // 404.3 km
+        console.log(da);*/
+       
+        //console.log(oldPos.distanceTo(newPos));
+
         return oldPos.distanceTo(newPos);
-    }*/
+    }
 
 };
 

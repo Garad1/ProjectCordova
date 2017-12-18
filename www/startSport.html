@@ -33,6 +33,7 @@ Affichage d'un event pour avoir plus d'infos dessus !
         <div class="app">
             <p>
                 <label for="Chrono">Chronomètre :</label><span id="js-chrono">00:00:00</span>
+                <label for="Chrono">Distance parcourue :</label><span id="js-meter">0</span>m
             </p>
             <p>
                 <input type="button" name="Start sport" id="js-start" value="Start">
@@ -43,9 +44,11 @@ Affichage d'un event pour avoir plus d'infos dessus !
         <footer>
             <input type="button" name="create" value="Créer" id="create"/>
         </footer>
-    <!--<script type="text/javascript" src="jquery-3.2.1.min.js"></script>-->
+    <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/database.js"></script>
+    <script type="text/javascript" src="js/dms.js"></script>
+    <script type="text/javascript" src="js/latlon-spherical.js"></script>
     <script type="text/javascript" src="js/chrono.js"></script>
     <script type="text/javascript" src="js/startSport.js"></script>
     </body>
