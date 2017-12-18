@@ -38,22 +38,30 @@ Affichage d'un event pour avoir plus d'infos dessus !
             <div class="formulary">
                 <h3 id="nameEvent"></h3>
 
+                
                 <p>
-                    <label for="eventName">Type : </label><span id="typeEvent"></span>
+                    <label for="eventName">Type</label>
+                    </br>
+                    <span class="information" id="typeEvent"></span>
+                </p>
+
+                <p>
+                    <label for="eventDateTime">Date</label>
+                    </br>
+                    <span class="information" id="dateEvent"></span>
                 </p>
                 <p>
-                    <label for="eventDateTime">Date : </label><span id="dateEvent"></span>
+                    <label for="eventDescription">Description </label><textarea class="description" placeholder="Describe your event" id="eventDescription" cols="30" rows="10"></textarea>
                 </p>
                 <p>
-                    <label for="eventDescription">Description </label><textarea placeholder="Describe your event" id="eventDescription" cols="30" rows="10"></textarea>
-                </p>
-                <p>
-                    <input type="button" name="Localisation" id="addLocalisation" value="Localisation">
                     <input type="text" name="textLocalisation" id="eventLocalisation" disabled="disabled"/>
                 </p>
-                    <input type="button" name="start Sport" id="startSport" value="Commencer une activité sportive"/>
                 <p>
-                    <input type="button" name="add photo" id="addPhoto" value="Ajouter une photo">
+                    <input class="orangeButton" type="button" name="Localisation" id="addLocalisation" value="Localisation">
+                </p>
+                    <input class="orangeButton" type="button" name="start Sport" id="startSport" value="Commencer une activité sportive"/>
+                <p>
+                    <input class="orangeButton" type="button" name="add photo" id="addPhoto" value="Ajouter une photo">
                 </p>
                 <div class="content">
                     <img id="photo" src="">

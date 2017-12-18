@@ -24,10 +24,13 @@
         <h3 id="creation">Création</h3>
         <form>
             <p>
-                <label for="eventName"></label><input type="text" placeholder="Nom de l'event" id="eventName" />
+                <label for="eventName"></label><input class="inputName" type="text" placeholder="Nom de l'event" id="eventName" />
             </p>
+
             <p>
-                 <label for="eventDateTime">Date : </label><input id="eventDateTime" type="datetime-local">
+                <label for="eventDateTime">Date : </label>
+                </br>
+                <input id="eventDateTime" type="datetime-local">
             </p>
             <!--<p>
                 <label for="eventDate">Date :</label><input id="eventDate" type="date">
@@ -35,8 +38,10 @@
             <p>
                 <label for="eventHour">Hour :</label><input type="time" id="eventHour" />
             </p>-->
+
             <p>
                 <label for="eventType">Type : </label>
+                </br>
                 <select id="selectType">
                     <option value="autre">Autre</option>
                     <option value="sport">Sport</option>
@@ -46,13 +51,15 @@
                 </select>
             </p>
             <p>
-                <label for="eventDescription"></label><textarea placeholder="Describe your event" id="eventDescription" cols="30" rows="10"></textarea>
+                <label for="eventDescription"></label><textarea class="description" placeholder="Describe your event" id="eventDescription" cols="30" rows="10"></textarea>
             </p>
             <p>
-                <input type="button" name="Localisation" id="addLocalisation" value="Localisation">
+                <input class="orangeButton" type="button" name="Localisation" id="addLocalisation" value="Localisation">
+            </p>
+            <p>
                 <input type="text" name="textLocalisation" id="eventLocalisation" disabled="disabled"/>
             </p>
-                <input type="button" name="add photo" id="addPhoto" value="Ajouter une photo">
+                <input class="orangeButton" type="button" name="add photo" id="addPhoto" value="Ajouter une photo">
             </p>
             <div class="content">
                 <img id="photo" src="">

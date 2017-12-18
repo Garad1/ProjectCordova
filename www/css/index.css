@@ -40,10 +40,57 @@ a{
     text-decoration: none;
 }
 
+
+#selectType{
+
+    background-color: #fff5bc;
+    border-right-color: #fff5bc;
+    border-top-color: #fff5bc;
+    border-left-color: #fff5bc;
+    border-bottom-color: black;
+    outline:none;
+}
+
+#delete{
+    background-color: #fff5bc;
+    border:none;
+    color: red;
+    font-weight: bold;
+}
+
+.information{
+    font-weight: bold;
+}
+
+.inputName{
+    background: transparent;
+    border-top:0px;
+    border-right:0px;
+    border-left:0px;
+    font-size: 100%;
+
+    border-bottom-color: black;
+    text-align: center;
+    outline:none;
+}
+
 .event{
     background-color: #f4c262;
     border-radius: 7px;
     margin-bottom: 2%;
+}
+
+.orangeButton {
+    background-color: #EDA12E;
+    color: white;
+    border-radius: 6px;
+}
+
+.description{
+    color: grey;
+    background-color: #ffffee;
+    border-radius: 5px;
+    font-family: "Times New Roman";
 }
 
 .searchEvent{
