@@ -10,7 +10,10 @@ var app = {
         document.querySelector("input#addPhoto").addEventListener("click", this.addPicture);
         document.querySelector("input#update").addEventListener("click",this.onUpdate);
         document.querySelector("input#delete").addEventListener("click",this.onDelete);
-        document.querySelector("input#startSport").addEventListener("click",this.startSport);
+        document.querySelector("input#startSport").addEventListener("click",function(){
+            document.location.href="startSport.html";
+        });
+
         
     },
 
