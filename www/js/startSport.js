@@ -136,12 +136,12 @@ var app = {
             if(app.latitude !== null && app.longitude !== null){
                 var result = app.calculDistance(app.latitude, app.longitude, updatedLatitude, updatedLongitude);
                 app.nbMeter += result;
-                console.log(app.nbMeter.toFixed(2));    
+                console.log(Math.round(app.nbMeter));    
             }
             console.log("MARCHEEEEE")
             app.latitude = updatedLatitude;
             app.longitude = updatedLongitude;
-            $('#js-meter').text(app.nbMeter.toFixed(2));
+            $('#js-meter').text(Math.round(app.nbMeter));
         }
     },
 
