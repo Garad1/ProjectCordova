@@ -48,37 +48,35 @@ var app = {
             alert("Le nom de l'evènement est vide");
         } else {
             var eventNew = {
-            "eventName" : eventName,
-            "date" : eventDateTime,
-            "eventType" : eventType,
-            "description" : eventDescription,
-            "notification" : notif,
-            "latitude": latitude,
-            "longitude" : longitude,
-            "eventPhoto" : photo
-        };
-
-        var db = new Database();
-        db.insertEvent(eventNew, function(tx,results){
-            console.log(results);
-            console.log(results.insertId);
-            createNotification(results.insertId, eventNew['eventName'], eventNew['date'], eventNew['description']);
-            document.location.href="index.html";
-        });
-
-        function createNotification(id, nameEvent, date, description){
-            console.log(cordova);
-            console.log(date);
-            console.log(new Date(date));
-            cordova.plugins.notification.local.schedule({
-                id: id,
-                at: new Date(date),
-                title: nameEvent,
-                text: description,
-                smallIcon: 'res://cordova',
+                "eventName" : eventName,
+                "date" : eventDateTime,
+                "eventType" : eventType,
+                "description" : eventDescription,
+                "notification" : notif,
+                "latitude": latitude,
+                "longitude" : longitude,
+                "eventPhoto" : photo
+            };
+            var db = new Database();
+            db.insertEvent(eventNew, function(tx,results){
+                console.log(results);
+                console.log(results.insertId);
+                createNotification(results.insertId, eventNew['eventName'], eventNew['date'], eventNew['description']);
+                document.location.href="index.html";
             });
-            console.log("GG LA NOTIF");
-        }
+            function createNotification(id, nameEvent, date, description){
+                console.log(cordova);
+                console.log(date);
+                console.log(new Date(date));
+                cordova.plugins.notification.local.schedule({
+                    id: id,
+                    at: new Date(date),
+                    title: nameEvent,
+                    text: description,
+                    smallIcon: 'res://cordova',
+                });
+                console.log("GG LA NOTIF");
+            }
         }  
     },
 
