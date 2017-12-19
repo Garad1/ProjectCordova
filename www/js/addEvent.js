@@ -28,7 +28,7 @@ var app = {
         document.querySelector("input#addLocalisation").addEventListener("click", this.localize);
         document.querySelector("input#addPhoto").addEventListener("click", this.addPicture);
         var date = new Date();
-        document.querySelector("input#eventDateTime").value = date.getFullYear() + "-" + ("0" + date.getMonth()).slice(-2) + "-" + ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2) ;
+        document.querySelector("input#eventDateTime").value = date.getFullYear() + "-" + ("0" + (date.getMonth() +1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2) ;
 	},
 
     insertEvent: function(){
@@ -48,7 +48,7 @@ var app = {
         if (eventName == "") {
             alert("Le nom de l'évènement est vide");
         } else if (eventDateTime == "") {
-            alert("L'évènement n'est daté");
+            alert("L'évènement n'est pas daté");
         } else {
             eventName = htmlEntities(eventName);
             eventDescription = htmlEntities(eventDescription);
@@ -66,9 +66,11 @@ var app = {
             };
             var db = new Database();
             db.insertEvent(eventNew, function(tx,results){
-                createNotification(results.insertId, eventNew['eventName'], eventNew['date'], eventNew['description']);
+                var dateObject = new Date(eventNew['date']);
+                createNotification(results.insertId, eventNew['eventName'], dateObject, eventNew['description']);
                 document.location.href="index.html";
             });
+            /*
             function createNotification(id, nameEvent, date, description){
                 cordova.plugins.notification.local.schedule({
                     id: id,
@@ -77,7 +79,19 @@ var app = {
                     text: description,
                     //smallIcon: 'res://cordova',
                 });
-            }
+            }*/
+
+            function createNotification(id, title, date, description){
+            console.log(cordova);
+            cordova.plugins.notification.local.schedule({
+                id: id,
+                title: title,
+                text: description,
+                at: date,
+                foreground: true,
+                data: { idEvent: id }
+            });
+        }
 
             function htmlEntities(str) {
                 return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&apos;');
