@@ -43,10 +43,15 @@ var app = {
         var longitude = loc[1];
         
         var notif = 1;
-
-        if(eventName == "" || eventDateTime == "" || eventType == "") {
-            alert("Le nom de l'evènement est vide");
+        if (eventName == "") {
+            alert("Le nom de l'évènement est vide");
+        } else if (eventDateTime == "") {
+            alert("L'évènement n'est daté");
         } else {
+            eventName = htmlEntities(eventName);
+            eventDescription = htmlEntities(eventDescription);
+            console.log(eventName);
+            console.log(eventDescription);
             var eventNew = {
                 "eventName" : eventName,
                 "date" : eventDateTime,
@@ -76,6 +81,10 @@ var app = {
                     smallIcon: 'res://cordova',
                 });
                 console.log("GG LA NOTIF");
+            }
+
+            function htmlEntities(str) {
+                return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&apos;');
             }
         }  
     },

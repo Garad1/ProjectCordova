@@ -43,7 +43,7 @@ class Database{
         }
         // Transaction error callback
         function errorCB(tx, err) {
-            console.log("Error processing SQL: "+err);
+            console.log(err);
         }
     }
 
