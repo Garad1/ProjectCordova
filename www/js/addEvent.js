@@ -44,12 +44,10 @@ var app = {
         
         var notif = 1;
 
-        console.log(eventName);
-        console.log(eventDateTime);
-        console.log(eventType);
-        console.log(eventDescription);     
-
-        var eventNew = {
+        if(eventName == "" || eventDateTime == "" || eventType == "") {
+            alert("Le nom de l'evènement est vide");
+        } else {
+            var eventNew = {
             "eventName" : eventName,
             "date" : eventDateTime,
             "eventType" : eventType,
@@ -81,6 +79,7 @@ var app = {
             });
             console.log("GG LA NOTIF");
         }
+        }  
     },
 
     localize: function(){

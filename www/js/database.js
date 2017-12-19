@@ -7,7 +7,7 @@ class Database{
         // Populate the database
         function populateDB(tx) {
             //CREATION DE LA TABLE
-            tx.executeSql('CREATE TABLE IF NOT EXISTS EVENT (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME DEFAULT (DATETIME(CURRENT_TIMESTAMP, \'LOCALTIME\')), eventType VARCHAR(20), eventName VARCHAR(255), description VARCHAR(2048), notification TINYINT(1), latitude VARCHAR(255), longitude VARCHAR(255), eventPhoto VARCHAR(2048))', [], function(tx, result){
+            tx.executeSql('CREATE TABLE IF NOT EXISTS EVENT (id INTEGER PRIMARY KEY AUTOINCREMENT, date DATETIME DEFAULT (DATETIME(CURRENT_TIMESTAMP, \'LOCALTIME\')), eventType VARCHAR(20), eventName VARCHAR(255), description VARCHAR(2048), latitude VARCHAR(255), longitude VARCHAR(255), eventPhoto VARCHAR(2048))', [], function(tx, result){
                 console.log(result);
             }, function(tx, err){
                 console.log(err);
@@ -38,7 +38,7 @@ class Database{
         console.log(eventNew);
 
         function populateDB(tx) {
-            var sql = "INSERT INTO EVENT (date,eventType,eventName,description,notification,latitude,longitude,eventPhoto) VALUES ('" + eventNew['date'] + "', '" + eventNew['eventType'] + "', '" + eventNew['eventName'] + "', '" + eventNew['description'] + "', 1 , '" + eventNew['latitude'] + "', '" + eventNew['longitude'] + "', '" + eventNew['eventPhoto'] + "')";
+            var sql = "INSERT INTO EVENT (date,eventType,eventName,description,latitude,longitude,eventPhoto) VALUES ('" + eventNew['date'] + "', '" + eventNew['eventType'] + "', '" + eventNew['eventName'] + "', '" + eventNew['description'] + "', '" + eventNew['latitude'] + "', '" + eventNew['longitude'] + "', '" + eventNew['eventPhoto'] + "')";
             tx.executeSql(sql, [], callback, errorCB);
         }
         // Transaction error callback
@@ -116,7 +116,7 @@ class Database{
         //event.js/html : pour avoir les infos d'un event sur la page d'un event
         this.db.transaction(populateDB, null);
         function populateDB(tx) {
-            var sql = "UPDATE EVENT SET description = '" + obj.description + "', notification = 1, eventPhoto = '" + obj.photo + "', latitude = '" + obj.latitude + "', longitude = '" + obj.longitude + "'  WHERE id = " + obj.id + ";"
+            var sql = "UPDATE EVENT SET description = '" + obj.description + "', eventPhoto = '" + obj.photo + "', latitude = '" + obj.latitude + "', longitude = '" + obj.longitude + "'  WHERE id = " + obj.id + ";"
             console.log(sql);
             tx.executeSql(sql, [], callback, errorCB);
         }
