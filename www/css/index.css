@@ -131,7 +131,7 @@ h3{
     margin-top: 2%;
 }
 
-#add, #create, #update {
+.footerButton {
     width: 100%;
     height: 100%;
     background: #EDA12E;
