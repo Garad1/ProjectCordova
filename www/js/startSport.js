@@ -35,13 +35,10 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
-        document.querySelector("#js-start").addEventListener("click", this.start);
-        document.querySelector("#js-stop").addEventListener("click", this.stop);
-        document.querySelector("#js-reset").addEventListener("click", this.reset);
-
-        //$('#js-start').on('click', app.start);
-        //$('#js-stop').on('click', app.stop);
-        //$('#js-reset').on('click', app.reset);
+        $('#js-start').on('click', app.start);
+        $('#js-stop').on('click', app.stop);
+        $('#js-reset').on('click', app.reset);
+        $('#js-stop').hide();
         var plugin = cordova.plugins.backgroundMode;
         plugin.setDefaults({ silent: true });
         plugin.on('activate', app.startBackground);
@@ -72,6 +69,8 @@ var app = {
             plugin.setEnabled(true);
             app.setGeolocalisation();
             app.isStarted = true;
+            $('#js-start').hide();
+            $('#js-stop').show();
         }
     },
 
@@ -79,6 +78,8 @@ var app = {
         console.log('disable');
         app.chrono.pause();
         app.pauseAndResetHandler();
+        $('#js-start').show();
+        $('#js-stop').hide();
     },
 
     reset: function(){
