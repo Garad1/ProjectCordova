@@ -27,6 +27,8 @@ var app = {
         document.querySelector("input#create").addEventListener("click", this.insertEvent);
         document.querySelector("input#addLocalisation").addEventListener("click", this.localize);
         document.querySelector("input#addPhoto").addEventListener("click", this.addPicture);
+        var date = new Date();
+        document.querySelector("input#eventDateTime").value = date.getFullYear() + "-" + ("0" + date.getMonth()).slice(-2) + "-" + ("0" + date.getDate()).slice(-2) + "T" + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2) ;
 	},
 
     insertEvent: function(){
@@ -64,23 +66,17 @@ var app = {
             };
             var db = new Database();
             db.insertEvent(eventNew, function(tx,results){
-                console.log(results);
-                console.log(results.insertId);
                 createNotification(results.insertId, eventNew['eventName'], eventNew['date'], eventNew['description']);
                 document.location.href="index.html";
             });
             function createNotification(id, nameEvent, date, description){
-                console.log(cordova);
-                console.log(date);
-                console.log(new Date(date));
                 cordova.plugins.notification.local.schedule({
                     id: id,
                     at: new Date(date),
                     title: nameEvent,
                     text: description,
-                    smallIcon: 'res://cordova',
+                    //smallIcon: 'res://cordova',
                 });
-                console.log("GG LA NOTIF");
             }
 
             function htmlEntities(str) {
