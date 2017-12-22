@@ -30,3 +30,5 @@ cordova plugin add cordova-plugin-whitelist
 
 A chaque nouveau terminal, il faut exécuter la commande suivante avant de run :
 source .bash_profile
+
+Notre dépot gitHub : https://github.com/Garad1/ProjectCordova
