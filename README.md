@@ -1,3 +1,5 @@
+Par Adam GARCIA et Jean-François RAMOS
+
 Pour exécuter notre application sur Android :
 
 - cordova platform add android
