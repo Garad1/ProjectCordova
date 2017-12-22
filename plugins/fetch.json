@@ -10,7 +10,7 @@
   "cordova-plugin-local-notification": {
     "source": {
       "type": "registry",
-      "id": "https://github.com/katzer/cordova-plugin-local-notifications"
+      "id": "https://github.com/katzer/cordova-plugin-local-notifications.git"
     },
     "is_top_level": true,
     "variables": {}
@@ -26,9 +26,25 @@
   "cordova-plugin-badge": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-badge@>=0.8.5"
+      "id": "cordova-plugin-badge@^0.8.5"
     },
-    "is_top_level": false,
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-background-mode": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-background-mode"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova.plugins.diagnostic": {
+    "source": {
+      "type": "registry",
+      "id": "cordova.plugins.diagnostic@^3.7.2"
+    },
+    "is_top_level": true,
     "variables": {}
   }
 }

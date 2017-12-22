@@ -70,16 +70,6 @@ var app = {
                 createNotification(results.insertId, eventNew['eventName'], dateObject, eventNew['description']);
                 document.location.href="index.html";
             });
-            /*
-            function createNotification(id, nameEvent, date, description){
-                cordova.plugins.notification.local.schedule({
-                    id: id,
-                    at: new Date(date),
-                    title: nameEvent,
-                    text: description,
-                    //smallIcon: 'res://cordova',
-                });
-            }*/
 
             function createNotification(id, title, date, description){
             console.log(cordova);
@@ -89,12 +79,17 @@ var app = {
                 text: description,
                 at: date,
                 foreground: true,
+                smallIcon: 'res://cordova',
                 data: { idEvent: id }
             });
         }
 
             function htmlEntities(str) {
-                return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&apos;');
+                return String(str).replace(/'/g, '&apos;').replace(/"/g, '&quot;');
+            }
+
+            function htmlEntitiesDecode(str) {
+                return String(str).replace('&apos;', "'").replace('&quot;', '"');
             }
         }  
     },

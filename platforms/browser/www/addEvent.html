@@ -1,56 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <link rel="stylesheet" type="text/css" href="css/index.css">
-    <title>TP2</title>
+    <meta charset="UTF-8">
+    <title>Doinger</title>
 </head>
 <body>
 
-<div class="app">
-    <h1>SWIDO</h1>
-    <h2>Create your Event</h2>
+<header>
+    <div id="titleImg">
+        <img src="img/title.png"/>
+    </div>
+</header>
 
-    <form>
-        <p>
-            <label for="eventName"></label><input type="text" placeholder="Nom de l'event" id="eventName" />
-        </p>
-        <p>
-             <label for="eventDateTime">Date : </label><input id="eventDateTime" type="datetime-local">
-        </p>
-        <!--<p>
-            <label for="eventDate">Date :</label><input id="eventDate" type="date">
-        </p>
-        <p>
-            <label for="eventHour">Hour :</label><input type="time" id="eventHour" />
-        </p>-->
-        <p>
-            <select id="selectType">
-                <option value="autre">Autre</option>
-                <option value="sport">Sport</option>
-                <option value="anniversaire">Anniversaire</option>
-                <option value="rdv">RDV</option>
-                <option value="travail">Travail</option>                    
-            </select>
-        </p>
-        <p>
-            <label for="eventDescription"></label><textarea placeholder="Describe your event" id="eventDescription"></textarea>
-        </p>
-        <p>
-            <label for="eventNotif">Notification :</label><input type="checkbox" id="eventNotif" />
-        </p>
-        <p>
-            <input type="button" name="create" value="Create event" id="create"/>
-            <input type="button" name="cancel" value="Cancel event" id="cancel"/>
-        </p>
-    </form>
+<div class="app">
+    <h2>Nouvel événement</h2>
+
+    <div class="formulary">
+        <h3 id="creation">Création</h3>
+        <form>
+            <p>
+                <label for="eventName"></label><input class="inputName" type="text" placeholder="Nom de l'event" id="eventName" />
+            </p>
+
+            <p>
+                <label for="eventDateTime">Date : </label>
+                </br>
+                <input id="eventDateTime" type="datetime-local">
+            </p>
+            <!--<p>
+                <label for="eventDate">Date :</label><input id="eventDate" type="date">
+            </p>
+            <p>
+                <label for="eventHour">Hour :</label><input type="time" id="eventHour" />
+            </p>-->
+
+            <p>
+                <label for="eventType">Type : </label>
+                </br>
+                <select id="selectType">
+                    <option value="autre">Autre</option>
+                    <option value="sport">Sport</option>
+                    <option value="anniversaire">Anniversaire</option>
+                    <option value="rdv">RDV</option>
+                    <option value="travail">Travail</option>                    
+                </select>
+            </p>
+            <p>
+                <label for="eventDescription"></label><textarea class="description" placeholder="Describe your event" id="eventDescription" cols="30" rows="10"></textarea>
+            </p>
+            <p>
+                <input class="orangeButton" type="button" name="Localisation" id="addLocalisation" value="Localisation">
+            </p>
+            <p>
+                <input type="text" name="textLocalisation" id="eventLocalisation" disabled="disabled"/>
+            </p>
+                <input class="orangeButton" type="button" name="add photo" id="addPhoto" value="Ajouter une photo">
+            </p>
+            <div class="content">
+                <img id="photo" src="">
+            </div>
+            
+        </form>
+
+    </div>
 </div>
+<footer>
+    <input class="footerButton"  type="button" name="create" value="Créer" id="create"/>
+</footer>
+<!--<script type="text/javascript" src="jquery-3.2.1.min.js"></script>-->
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/database.js"></script>
 <script type="text/javascript" src="js/addEvent.js"></script>
+
 
 </body>
 </html>

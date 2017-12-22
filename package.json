@@ -12,15 +12,20 @@
   "dependencies": {
     "cordova-android": "^6.4.0",
     "cordova-browser": "^5.0.1",
+    "cordova-plugin-background-mode": "^0.7.2",
     "cordova-plugin-badge": "^0.8.5",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-local-notification": "git+https://github.com/katzer/cordova-plugin-local-notifications.git",
-    "cordova-plugin-whitelist": "^1.3.2"
+    "cordova-plugin-whitelist": "^1.3.2",
+    "cordova.plugins.diagnostic": "^3.7.2"
   },
   "cordova": {
     "plugins": {
       "cordova-plugin-whitelist": {},
-      "cordova-plugin-local-notification": {}
+      "cordova-plugin-local-notification": {},
+      "cordova-plugin-background-mode": {},
+      "cordova.plugins.diagnostic": {},
+      "cordova-plugin-badge": {}
     },
     "platforms": [
       "browser",
